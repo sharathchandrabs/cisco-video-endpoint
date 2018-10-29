@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <title>Cisco</title>
+    
+
+  </head>
+  <body>
+  <meta http-equiv="refresh" content="60" >
+  <script>
+  window.onbeforeunload = function() {
+  return "Page refreshed after a minute.";
+  };
+  </script>
+  <h1 align="center">Cisco Video Endpoint</h1>
+
+  {% for key,value in final_dict.items() %}
+  <div class="container">
+  <div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#{{key.replace(" ","")}}" aria-expanded="true" aria-controls="{{key.replace(" ", "")}}">
+          {{key}}
+        </button>
+      </h5>
+    </div>
+
+    <div id="{{key.replace(" ","")}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+       {%if key != 'Peripherals'%}
+       {%for k,v in value.items()  %}
+       <p>{{k}}: {{v}}</p>
+       {% endfor %}
+       {%else%}
+       {% for elems in value%}
+       {% for infos, dets in elems.items()%}
+       <p>{{infos}}: {{dets}}</p>
+       {% endfor %}
+       <hr size=2>
+       {% endfor %}
+       {%endif%}
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+  {% endfor %} 
+
+  </body>
+</html>
